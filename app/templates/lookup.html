@@ -4,7 +4,7 @@
     <h2 style="text-align: center; margin-top: 20%;">Which pokemon would you like to know about?</h2>
     <div class="flexbox_center">
         <form method="POST">
-            {{ form.hidden_tag }}
+            {{ form.hidden_tag() }}
 
             {{ form.query }}
             {{ form.submit }}
