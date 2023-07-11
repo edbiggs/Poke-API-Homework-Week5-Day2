@@ -10,7 +10,12 @@
             {{ form.submit }}
         </form>
     </div>
-    <div>
-        {{ output }}
-    </div>
+    {% if output %}
+        <div class="flexbox_center">
+            {% for item in output %}
+                {{item}}
+                <br>
+            {% endfor %}
+        </div>
+    {% endif %}
 {% endblock %}

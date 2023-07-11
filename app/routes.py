@@ -31,7 +31,7 @@ def lookup_page():
     form = SearchForm()
     if request.method == "POST":
         output = {}
-
+    
         search_query = (form.query.data).lower()
         poke_info = requests.get(f"https://pokeapi.co/api/v2/pokemon/{search_query}").json()
         poke_sprites = requests.get(f"https://pokeapi.co/api/v2/pokemon-form/{search_query}/").json()
@@ -45,8 +45,9 @@ def lookup_page():
         poke_sprite_female = poke_sprites['sprites']['front_shiny_female']
 
         output.update({'Name':poke_name,'Ability':poke_ability,'Base HP':poke_hp,'Base Attack':poke_att,'Base Defense':poke_def,'Male Shiny Sprite':poke_sprite_male,'Female Shiny Sprite':poke_sprite_female})
-        
-        return output
+
+        return render_template('lookup.html', form=form, output=output)
+    
     return render_template('lookup.html', form=form)
 
 # @app.route('/lookup_result', methods=["GET"])
