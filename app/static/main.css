@@ -1,0 +1,13 @@
+.thing_container{
+    height: 15%;
+    width:18%;
+    border:2px solid black
+}
+
+.flexbox_center{
+    display: flex;
+    align-self: center;
+    margin: auto;
+    width: fit-content;
+    border: 2px solid black;
+}
