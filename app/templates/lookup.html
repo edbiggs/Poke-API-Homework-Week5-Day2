@@ -12,8 +12,8 @@
     </div>
     {% if output %}
         <div class="flexbox_center">
-            {% for item in output %}
-                {{item}}
+            {% for key,value in output.items() %}
+                {{key, value}}
                 <br>
             {% endfor %}
         </div>

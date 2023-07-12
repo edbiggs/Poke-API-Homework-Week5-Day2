@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <form class="col-3 border p-3" method="POST">
+        {{ form.hidden_tag() }}
 
+        {{ form.username (class='form-control', placeholder='Username') }}
+        {{ form.password (class= 'form-control', placeholder='Password') }}
+        {{ form.submit (class='form-control',class = 'btn btn-primary') }}
+    </form>
 {% endblock %}
