@@ -124,5 +124,8 @@ def lookup_page():
 def team_page():
     return render_template('team.html')
 
+# @app.route('/catch/<poke_id>', methods=["GET", "POST"])
+# def catch():
+
 
     

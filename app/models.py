@@ -32,12 +32,13 @@ class Pokemon(db.Model):
 
 class Team(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
-    name =  db.Column(db.String(100),nullable=False)
-    ability =  db.Column(db.String(100),nullable=False)
-    base_hp =  db.Column(db.Integer, nullable=False)
-    base_att =  db.Column(db.Integer, nullable=False)
-    base_def =  db.Column(db.Integer, nullable=False)
-    sprite_url =  db.Column(db.String, nullable=False)
+    # name =  db.Column(db.String(100),nullable=False)
+    # ability =  db.Column(db.String(100),nullable=False)
+    # base_hp =  db.Column(db.Integer, nullable=False)
+    # base_att =  db.Column(db.Integer, nullable=False)
+    # base_def =  db.Column(db.Integer, nullable=False)
+    # sprite_url =  db.Column(db.String, nullable=False)
     date_added = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    pokemon_id = db.Column(db.Integer, db.ForeignKey("pokemon.id"), nullable=False)
 
