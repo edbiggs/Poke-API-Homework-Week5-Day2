@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, SelectField
 from wtforms.validators import DataRequired, EqualTo
 
 class SignUpForm(FlaskForm):
@@ -17,3 +17,6 @@ class LoginForm(FlaskForm):
 class SearchForm(FlaskForm):
     query = StringField('Search', [DataRequired()])
     submit = SubmitField() 
+
+class AddForm(FlaskForm):
+    add_to_team = SubmitField()

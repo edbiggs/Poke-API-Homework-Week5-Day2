@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from app import app
-from .forms import SignUpForm, LoginForm, SearchForm
+from .forms import SignUpForm, LoginForm, SearchForm, AddForm
 import requests, json
 from flask_login import login_user, logout_user, login_required, current_user
 from .models import User, Pokemon, db
@@ -82,6 +82,7 @@ def signup_page():
 @app.route('/lookup', methods=["GET", "POST"])
 def lookup_page():
     form = SearchForm()
+    # form_2 = AddForm()
     if request.method == "POST":
         output = {}
     
@@ -110,16 +111,18 @@ def lookup_page():
             db.session.add(pokemon)
             db.session.commit()
             print(f"Successfully added Pokemon to database: {poke_name, poke_ability, poke_hp, poke_att, poke_def, poke_sprite}")
-            
+        
+        
+
+
 
         return render_template('lookup.html', form=form, output=output, sprite=poke_sprite)
     
     return render_template('lookup.html', form=form)
 
-# @app.route('/lookup_result', methods=["GET"])
-# def lookup_result():
-#     response = print(requests.get("https://pokeapi.co/api/v2/pokemon/mankey").json()['base_experience'])
-#     return render_template('lookup_result.html')
+@app.route('/team', methods=["GET", "POST"])
+def team_page():
+    return render_template('team.html')
 
 
     

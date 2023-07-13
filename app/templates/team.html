@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static',filename='team.css')}}">
+{% endblock %}
+
+{% block content %}
+<h1 class="white-font" style="margin-left: 5%; margin-top: 5%;">
+    
+</h1>
+{% endblock %}
+
+{% block content_ua %}
+    <h1 class="white-font" style="margin-left: 5%; margin-top: 5%;">
+        
+    </h1>
+    <form class="col-3 border p-3 rounded sign-in-form" method="POST">
+        {{ form.hidden_tag() }}
+
+
+    </form>
+{% endblock %}
