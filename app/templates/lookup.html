@@ -5,21 +5,29 @@
 {% endblock %}
 
 {% block content %}
-    <h2 class="lookup_prompt white-font">Which pokemon would you like to know about?</h2>
-    <div class="flexbox_search_result">
-        <form method="POST">
+    <h2 class="white-font" style="margin-left: 5%; margin-top: 5%;">
+        Which pokemon would you like to know about?
+    </h2>
+        <form class=" border p-3 rounded sign-in-form" method="POST">
             {{ form.hidden_tag() }}
 
             {{ form.query }}
             {{ form.submit }}
         </form>
-    </div>
     {% if output %}
-        <div class="flexbox_search_result">
-            {% for key,value in output.items() %}
-                {{key, value}}
-                <br>
-            {% endfor %}
+        <div class="flexbox_container">
+            <div class="flexbox_search_result rounded">
+                {% for key,value in output.items() %}
+                    {% if key == "Sprite" %}
+                        <div class="sprite_div">
+                            <img src="{{ value }}", alt="sprite">
+                        </div>   
+                    {%  else %}
+                        {{key, value}}
+                    {% endif %}
+                    <br>
+                {% endfor %}
+            </div>
         </div>
     {% endif %}
 {% endblock %}

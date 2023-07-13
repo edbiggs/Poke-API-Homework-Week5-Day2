@@ -4,6 +4,12 @@
     <link rel="stylesheet" href="{{url_for('static',filename='login.css')}}">
 {% endblock %}
 
+{% block content %}
+<h1 class="white-font" style="margin-left: 5%; margin-top: 5%;">
+    You are already logged in!
+</h1>
+{% endblock %}
+
 {% block content_ua %}
     <h1 class="white-font" style="margin-left: 5%; margin-top: 5%;">
         Enter Username and Password:

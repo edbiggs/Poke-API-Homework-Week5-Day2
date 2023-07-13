@@ -3,12 +3,27 @@ body{
     background-size: 100%;
 }
 
+.flexbox_container{
+    display: flex;
+    height: 400px;
+    width: 40%;
+    /* border: 3px solid white; */
+
+}
+
 .flexbox_search_result{
     display: flex;
     align-self:center;
-    margin: auto;
-    width: fit-content;
-    border: 2px solid black;
+    margin-left: 30%;
+    margin-top: 2%;
+    height: 90%;
+    width: 70%;
+    background-color: white;
+}
+
+.sprite_div{
+    display:flex;
+    flex-grow: 1;
 }
 
 .lookup_prompt{
@@ -19,4 +34,11 @@ body{
 
 .white-font{
     color: white
+}
+
+.sign-in-form{
+    display: block;
+    margin-left: 16%;
+    margin-top: 2%;
+    margin-right: 65%;
 }

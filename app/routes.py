@@ -3,7 +3,7 @@ from app import app
 from .forms import SignUpForm, LoginForm, SearchForm
 import requests, json
 from flask_login import login_user, logout_user, login_required, current_user
-from .models import User, db
+from .models import User, Pokemon, db
 from werkzeug.security import check_password_hash
 
 
@@ -94,12 +94,25 @@ def lookup_page():
         poke_def = poke_info['stats'][2]['base_stat']
         poke_att = poke_info['stats'][1]['base_stat']
         poke_hp = poke_info['stats'][0]['base_stat']
-        poke_sprite_male = poke_sprites['sprites']['front_shiny']
-        poke_sprite_female = poke_sprites['sprites']['front_shiny_female']
+        poke_sprite = poke_sprites['sprites']['front_shiny']
 
-        output.update({'Name':poke_name,'Ability':poke_ability,'Base HP':poke_hp,'Base Attack':poke_att,'Base Defense':poke_def,'Male Shiny Sprite':poke_sprite_male,'Female Shiny Sprite':poke_sprite_female})
+        output.update({'Name':poke_name,'Ability':poke_ability,'Base HP':poke_hp,'Base Attack':poke_att,'Base Defense':poke_def,'Sprite':poke_sprite})
 
-        return render_template('lookup.html', form=form, output=output)
+        if db.session.query(Pokemon.id).filter_by(name = poke_name).first() is None:
+            pokemon = Pokemon()
+            pokemon.name = poke_name
+            pokemon.ability = poke_ability
+            pokemon.base_hp = poke_hp
+            pokemon.base_att = poke_att
+            pokemon.base_def = poke_def
+            pokemon.sprite_url = poke_sprite
+
+            db.session.add(pokemon)
+            db.session.commit()
+            print(f"Successfully added Pokemon to database: {poke_name, poke_ability, poke_hp, poke_att, poke_def, poke_sprite}")
+            
+
+        return render_template('lookup.html', form=form, output=output, sprite=poke_sprite)
     
     return render_template('lookup.html', form=form)
 
