@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static',filename='lookup.css')}}">
+{% endblock %}
+
 {% block content %}
-    <h2 style="text-align: center; margin-top: 20%;">Which pokemon would you like to know about?</h2>
-    <div class="flexbox_center">
+    <h2 class="lookup_prompt white-font">Which pokemon would you like to know about?</h2>
+    <div class="flexbox_search_result">
         <form method="POST">
             {{ form.hidden_tag() }}
 
@@ -11,7 +15,7 @@
         </form>
     </div>
     {% if output %}
-        <div class="flexbox_center">
+        <div class="flexbox_search_result">
             {% for key,value in output.items() %}
                 {{key, value}}
                 <br>

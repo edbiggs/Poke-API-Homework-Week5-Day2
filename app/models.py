@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 from datetime import datetime
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 
@@ -13,10 +14,10 @@ class User(db.Model, UserMixin):
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
     team = db.relationship("Team", backref="owner")
 
-    # def __init__(self, username, password, email):
-    #     self.username = username
-    #     self.password = password
-    #     self.email = email
+    def __init__(self, username, password, email):
+        self.username = username
+        self.password = generate_password_hash(password)
+        self.email = email
 
 
 class Pokemon(db.Model):

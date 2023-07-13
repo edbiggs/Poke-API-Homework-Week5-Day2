@@ -1,0 +1,22 @@
+body{
+    background-image: url("images/mewtwotwo.jpg");
+    background-size: 100%;
+}
+
+.flexbox_search_result{
+    display: flex;
+    align-self:center;
+    margin: auto;
+    width: fit-content;
+    border: 2px solid black;
+}
+
+.lookup_prompt{
+    text-align: center;
+    margin-top: 6%;
+    color: white;
+}
+
+.white-font{
+    color: white
+}

@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 
-{% block content %}
-    <form class="col-3 border p-3" method="POST">
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static',filename='login.css')}}">
+{% endblock %}
+
+{% block content_ua %}
+    <h1 class="white-font" style="margin-left: 5%; margin-top: 5%;">
+        Enter Username and Password:
+    </h1>
+    <form class="col-3 border p-3 rounded sign-in-form" method="POST">
         {{ form.hidden_tag() }}
 
         {{ form.username (class='form-control', placeholder='Username') }}

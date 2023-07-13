@@ -4,11 +4,29 @@ from .forms import SignUpForm, LoginForm, SearchForm
 import requests, json
 from flask_login import login_user, logout_user, login_required, current_user
 from .models import User, db
+from werkzeug.security import check_password_hash
 
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def home_page():
-    return render_template('index.html')
+    form = LoginForm()
+    if request.method == "POST":
+        if form.validate():
+            username = form.username.data
+            password = form.password.data
+
+            user = User.query.filter_by(username=username).first()
+
+            if user:
+                if check_password_hash(user.password, password):
+                    login_user(user)
+                    return redirect(url_for('home_page'))
+                else:
+                    print("Error: Username or password invalid")
+            else:
+                print(f"Could not find user {user}")
+
+    return render_template('index.html', form=form)
 
 @app.route('/login', methods=["GET","POST"])
 def login_page():
@@ -21,7 +39,7 @@ def login_page():
             user = User.query.filter_by(username=username).first()
 
             if user:
-                if user.password == password:
+                if check_password_hash(user.password, password):
                     login_user(user)
                     return redirect(url_for('home_page'))
                 else:

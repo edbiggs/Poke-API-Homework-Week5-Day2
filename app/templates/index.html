@@ -1,8 +1,32 @@
+
 {% extends 'base.html' %}
 
-{% block content %}
-    <h1 style="text-align: center;">
-        Welcome to Pokemon API! 
-        <!-- note: probably come up with a better name than this at some point -->
-    </h1>
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}">
 {% endblock %}
+
+<!-- {% if current_user.is_authenticated %} -->
+    {% block content %}
+            <h1 class="white-font" style="text-align: center;">
+                Welcome to Pokemon API! 
+            </h1>
+
+    {% endblock %}
+<!-- {% else %}  -->
+    {% block content_alt %}
+
+    <h1 class="white-font" style="text-align: center;">
+        Welcome to Pokemon API! Please log in:
+    </h1>
+    <div> 
+        <form class="col-3 border p-3 rounded sign-in-form" method="POST">
+            {{ form.hidden_tag() }}
+
+            {{ form.username (class='form-control', placeholder='Username') }}
+            {{ form.password (class= 'form-control', placeholder='Password') }}
+            {{ form.submit (class='form-control',class = 'btn btn-primary') }}
+        </form>
+    </div>
+   
+    {% endblock %}
+<!-- {% endif %} -->
