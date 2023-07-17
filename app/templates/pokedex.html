@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{url_for('static',filename='pokedex.css')}}">
+{% endblock %}
+
+{% block content %}
+    <h1 class="white-font" style="margin-left: 5%; margin-top: 5%;">
+        
+    </h1>
+        {% if output %}
+        <div class="flexbox_container">
+            <div class="flexbox_search_result rounded">
+               
+                    <div>{{pokemon}}</div> 
+
+     
+                    <br>
+                
+        {% endif %}
+{% endblock %}
+
+    {% block content_ua %}
+        <h1 class="white-font" style="margin-left: 5%; margin-top: 5%;">
+            
+        </h1>
+    {% endblock %}
+

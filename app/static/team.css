@@ -1,4 +1,41 @@
 body{
     background-image: url("images/tails.webp");
     background-size: 100%;
+    height: 100%;
+}
+
+.flex_container{
+    display: flex;
+    height: 450px;
+    border: 5px solid red;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.flex_sprite{
+    display: flex;
+    height: 55%;
+    align-self: center;
+    border: 2px solid black;
+
+
+}
+
+.flex_item{
+    display: flex;
+    height: 100%;
+    width: 25%;
+    background-color: white;
+    flex-direction: row-reverse;
+    border:4px solid blue;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    
+}
+
+.flex_sub_item{
+    border: 3px solid green;
+    width: 50%;
+    justify-self:self-start;
 }

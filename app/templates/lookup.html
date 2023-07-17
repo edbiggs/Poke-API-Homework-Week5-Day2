@@ -22,20 +22,22 @@
                         <div class="sprite_div">
                             <img src="{{ value }}", alt="sprite">
                         </div>   
-                    {%  else %}
+                    {% else %}
                         {{key, value}}
 
  
                     {% endif %}
                     <br>
+                    {% endfor %}
                     
-                        
-                    
-                {% endfor %}
+                      
+                
                 {% block content_ua %}
-                    <a class="white-font btn-primary">Catch</a>
                 {% endblock %}
+                <a class="btn btn-primary catch" href="{{url_for('catch_poke', name=output.Name)}}">Catch</a>
             </div>
+            
         </div>
+        
     {% endif %}
 {% endblock %}

@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 
 {% block css %}
@@ -5,18 +6,68 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="white-font" style="margin-left: 5%; margin-top: 5%;">
-    
-</h1>
-{% endblock %}
+    {% for pokemon in team %}
+        <div class="flex_container">
+            
+            
 
-{% block content_ua %}
-    <h1 class="white-font" style="margin-left: 5%; margin-top: 5%;">
-        
-    </h1>
-    <form class="col-3 border p-3 rounded sign-in-form" method="POST">
-        {{ form.hidden_tag() }}
+            <div class="flex_item">
+                <div class="flex_sprite">
+                    <img src="{{ pokemon.sprite_url }}", alt="sprite">
+                </div>
 
+                <div class="flex_sub_item">
+                    {{pokemon.name}}
+                </div>
+                <div class="flex_sub_item">
+                   Name: 
+                </div>
+                <div class="flex_sub_item">
+                    {{pokemon.ability}}
+                </div>
+                <div class="flex_sub_item">
+                    Ability:
+                </div>
+                <div class="flex_sub_item">
+                    {{pokemon.base_hp}}
+                </div>
+                <div class="flex_sub_item">
+                    Base HP:
+                </div>
+                <div class="flex_sub_item">
+                   {{pokemon.base_att}} 
+                </div>
+                <div class="flex_sub_item">
+                    {{pokemon.base_hp}}
+                </div>
+                <div class="flex_sub_item">
+                    {{pokemon.base_att}}
+                </div>
+                <div class="flex_sub_item">
+                    {{pokemon.base_def}}
+                </div>
+                
+            </div>
 
-    </form>
-{% endblock %}
+            <div class="flex_item">
+                {{pokemon.name}}
+                {{pokemon.ability}}
+                {{pokemon.base_hp}}
+                {{pokemon.base_att}}
+                {{pokemon.base_def}}
+            </div>
+
+            <div class="flex_item">
+                {{pokemon.name}}
+                {{pokemon.ability}}
+                {{pokemon.base_hp}}
+                {{pokemon.base_att}}
+                {{pokemon.base_def}}
+            </div>
+
+            
+
+            </div>
+            {% endfor %}
+            {% endblock %} 
+        </div>

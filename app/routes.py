@@ -52,6 +52,7 @@ def login_page():
 
 
 @app.route('/logout')
+@login_required
 def logout_page():
     logout_user()
     return redirect(url_for('login_page'))
@@ -66,7 +67,7 @@ def signup_page():
             password = form.password.data
             email = form.email.data
 
-            user = User()
+            user = User(username,password,email)
             user.username = username
             user.password = password
             user.email = email
@@ -95,10 +96,10 @@ def lookup_page():
         poke_def = poke_info['stats'][2]['base_stat']
         poke_att = poke_info['stats'][1]['base_stat']
         poke_hp = poke_info['stats'][0]['base_stat']
-        poke_sprite = poke_sprites['sprites']['front_shiny']
+        poke_sprite = poke_sprites['sprites']['front_default']
 
         output.update({'Name':poke_name,'Ability':poke_ability,'Base HP':poke_hp,'Base Attack':poke_att,'Base Defense':poke_def,'Sprite':poke_sprite})
-
+        print(output)
         if db.session.query(Pokemon.id).filter_by(name = poke_name).first() is None:
             pokemon = Pokemon()
             pokemon.name = poke_name
@@ -112,7 +113,6 @@ def lookup_page():
             db.session.commit()
             print(f"Successfully added Pokemon to database: {poke_name, poke_ability, poke_hp, poke_att, poke_def, poke_sprite}")
         
-        
 
 
 
@@ -120,12 +120,48 @@ def lookup_page():
     
     return render_template('lookup.html', form=form)
 
-@app.route('/team', methods=["GET", "POST"])
-def team_page():
-    return render_template('team.html')
+@app.route('/pokedex', methods=["GET", "POST"])
+@login_required
+
+def pokedex_page():
+    pokemon = db.session.query(Pokemon.id).all()
+
+    # output.update({'Name':poke_name,'Ability':poke_ability,'Base HP':poke_hp,'Base Attack':poke_att,'Base Defense':poke_def,'Sprite':poke_sprite})
+    return render_template('pokedex.html', pokemon=pokemon)
+
+# @app.route('/lookup/<add_to_team>', methods=["GET", "POST"])
+# @login_required
+# def team_page(add_to_team):
+#     team = 
+#     return render_template('team.html')
 
 # @app.route('/catch/<poke_id>', methods=["GET", "POST"])
 # def catch():
 
+
+@app.route('/catch_poke/<name>')
+def catch_poke(name):
+    print(name)
+    pokemon = Pokemon.query.filter_by(name=name).first()
+    print(pokemon)
+    current_user.catch(pokemon)
+    return redirect(url_for('lookup_page'))
+    # if pokemon in current_user.team:
+
+
+@app.route('/team/')
+def team():
+    team = current_user.team
+    return render_template('team.html', team=team)
+
+# @app.route('/team/<my_team>')
+# def team_page(my_team):
+    
+#     return render_template('team.html', team)
+
+
+# current_team = current_user.team
+# for poke in current_team:
+    # current_total += poke.base_hp 
 
     

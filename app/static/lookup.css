@@ -21,6 +21,12 @@ body{
     background-color: white;
 }
 
+.catch{
+    display: flex;
+    align-self: flex-end;
+
+}
+
 .sprite_div{
     display:flex;
     flex-grow: 1;
