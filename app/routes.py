@@ -68,9 +68,7 @@ def signup_page():
             email = form.email.data
 
             user = User(username,password,email)
-            user.username = username
-            user.password = password
-            user.email = email
+            #took this out, when you did that you reasigned what the user was initalized with
 
             db.session.add(user)
             db.session.commit()
@@ -89,14 +87,14 @@ def lookup_page():
     
         search_query = (form.query.data).lower()
         poke_info = requests.get(f"https://pokeapi.co/api/v2/pokemon/{search_query}").json()
-        poke_sprites = requests.get(f"https://pokeapi.co/api/v2/pokemon-form/{search_query}/").json()
+        #this fails on ones it should work on, we can get the pictures from the first call!
 
         poke_name = poke_info['forms'][0]['name']
         poke_ability = poke_info['abilities'][0]['ability']['name']
         poke_def = poke_info['stats'][2]['base_stat']
         poke_att = poke_info['stats'][1]['base_stat']
         poke_hp = poke_info['stats'][0]['base_stat']
-        poke_sprite = poke_sprites['sprites']['front_default']
+        poke_sprite = poke_info['sprites']['other']['home']["front_default"]
 
         output.update({'Name':poke_name,'Ability':poke_ability,'Base HP':poke_hp,'Base Attack':poke_att,'Base Defense':poke_def,'Sprite':poke_sprite})
         print(output)
@@ -161,6 +159,9 @@ def release_poke(name):
     print(pokemon)
     current_user.release_poke(pokemon)
     return redirect(url_for('team_page'))
+
+
+
 
 # @app.route('/team/<my_team>')
 # def team_page(my_team):

@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <!-- {% for pokemon in team %} -->
+    {% for pokemon in team %}
         <div class="flex_container">
             
             
@@ -17,117 +17,39 @@
                 </div>
 
                 <div class="flex_sub_item">
-                    {{team[0].name}}
+                    {{pokemon.name}}
                 </div>
                 <div class="flex_sub_item">
                    Name: 
                 </div>
                 <div class="flex_sub_item">
-                    {{team[0].ability}}
+                    {{pokemon.ability}}
                 </div>
                 <div class="flex_sub_item">
                     Ability:
                 </div>
                 <div class="flex_sub_item">
-                    {{team[0].base_hp}}
+                    {{pokemon.base_hp}}
                 </div>
                 <div class="flex_sub_item">
                     HP:
                 </div>
                 <div class="flex_sub_item">
-                   {{team[0].base_att}} 
+                   {{pokemon.base_att}} 
                 </div>
                 <div class="flex_sub_item">
                     Attack:
                 </div>
                 <div class="flex_sub_item">
-                    {{team[0].base_def}}
+                    {{pokemon.base_def}}
                 </div>
                 <div class="flex_sub_item">
                     Defense:
                 </div>
-                <a class="btn btn-primary release" href="{{url_for('release_poke', name=current_user.team[0].name)}}">Release</a>
+                <a class="btn btn-primary release" href="{{url_for('release_poke', name=pokemon.name)}}">Release</a>
             </div>
-<!-- 
-            <div class="flex_item">
-                <div class="flex_sprite">
-                    <img src="{{ pokemon.sprite_url }}", alt="sprite">
-                </div>
-
-                <div class="flex_sub_item"> -->
-                    <!-- {{team[1].name}}
-                </div>
-                <div class="flex_sub_item">
-                   Name: 
-                </div>
-                <div class="flex_sub_item">
-                    {{team[1].ability}}
-                </div>
-                <div class="flex_sub_item">
-                    Ability:
-                </div>
-                <div class="flex_sub_item">
-                    {{team[1].base_hp}}
-                </div>
-                <div class="flex_sub_item">
-                    HP:
-                </div>
-                <div class="flex_sub_item">
-                   {{team[1].base_att}} 
-                </div>
-                <div class="flex_sub_item">
-                    Attack:
-                </div>
-                <div class="flex_sub_item">
-                    {{team[1].base_def}}
-                </div>
-                <div class="flex_sub_item">
-                    Defense:
-                </div>
-                
-            </div>
-
-            <div class="flex_item">
-                <div class="flex_sprite">
-                    <img src="{{ pokemon.sprite_url }}", alt="sprite">
-                </div>
-
-                <div class="flex_sub_item">
-                    {{team[2].name}}
-                </div>
-                <div class="flex_sub_item">
-                   Name: 
-                </div>
-                <div class="flex_sub_item">
-                    {{team[2].ability}}
-                </div>
-                <div class="flex_sub_item">
-                    Ability:
-                </div>
-                <div class="flex_sub_item">
-                    {{team[2].base_hp}}
-                </div>
-                <div class="flex_sub_item">
-                    HP:
-                </div>
-                <div class="flex_sub_item">
-                   {{team[2].base_att}} 
-                </div>
-                <div class="flex_sub_item">
-                    Attack:
-                </div>
-                <div class="flex_sub_item">
-                    {{team[2].base_def}}
-                </div>
-                <div class="flex_sub_item">
-                    Defense:
-                </div>
-                
-            </div> -->
-
-            
-
-            </div>
-            <!-- {% endfor %} -->
+            {% endfor %}
             {% endblock %} 
         </div>
+
+        <!-- so jinja actually will read lines that have been commented out! -->
