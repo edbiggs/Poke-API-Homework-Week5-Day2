@@ -150,9 +150,17 @@ def catch_poke(name):
 
 
 @app.route('/team/')
-def team():
+def team_page():
     team = current_user.team
     return render_template('team.html', team=team)
+
+@app.route('/release_poke/<name>')
+def release_poke(name):
+    print(name)
+    pokemon = Pokemon.query.filter_by(name=name).first()
+    print(pokemon)
+    current_user.release_poke(pokemon)
+    return redirect(url_for('team_page'))
 
 # @app.route('/team/<my_team>')
 # def team_page(my_team):

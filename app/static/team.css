@@ -7,7 +7,7 @@ body{
 .flex_container{
     display: flex;
     height: 450px;
-    border: 5px solid red;
+    /* border: 5px solid red; */
     align-items: center;
     justify-content: space-between;
 
@@ -17,7 +17,7 @@ body{
     display: flex;
     height: 55%;
     align-self: center;
-    border: 2px solid black;
+    /* border: 2px solid black; */
 
 
 }
@@ -28,14 +28,20 @@ body{
     width: 25%;
     background-color: white;
     flex-direction: row-reverse;
-    border:4px solid blue;
+    /* border:4px solid blue; */
     align-items: flex-start;
     flex-wrap: wrap;
     
 }
 
 .flex_sub_item{
-    border: 3px solid green;
+    border: 1px solid black;
     width: 50%;
     justify-self:self-start;
+}
+
+.release{
+    display: flex;
+    align-self: flex-end;
+
 }
