@@ -2,14 +2,19 @@
 {% extends 'base.html' %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{url_for('static',filename='team.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='battle.css')}}">
 {% endblock %}
 
+
+
 {% block content %}
-    {% for pokemon in team %}
-        <div class="flex_container">
+    {% for user in users %}
+        {% if user != current_user %}
+            {% if user.get_team_length() == 5 %}
+    <div class="flex_container">
+                {% for pokemon in user.get_team() %}
             
-            
+   
 
             <div class="flex_item">
                 <div class="flex_sprite">
@@ -46,11 +51,17 @@
                 <div class="flex_sub_item">
                     Defense:
                 </div>
-                <a class="btn btn-primary release" href="{{url_for('release_poke', name=pokemon.name)}}">Release</a>
             </div>
+                {% endfor %}
+                <a class="btn btn-primary" href="{{url_for('start_battle', opponent_id=user.id)}}">Battle</a>
+        </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        
+{% endblock %}
             
 
-            </div>
-            {% endfor %}
-            {% endblock %} 
-        </div>
+
+
+        

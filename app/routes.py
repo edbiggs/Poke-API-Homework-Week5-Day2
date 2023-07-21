@@ -1,9 +1,9 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from app import app
 from .forms import SignUpForm, LoginForm, SearchForm, AddForm
 import requests, json
 from flask_login import login_user, logout_user, login_required, current_user
-from .models import User, Pokemon, db
+from .models import User, Pokemon, Team, db
 from werkzeug.security import check_password_hash
 
 
@@ -68,9 +68,6 @@ def signup_page():
             email = form.email.data
 
             user = User(username,password,email)
-            user.username = username
-            user.password = password
-            user.email = email
 
             db.session.add(user)
             db.session.commit()
@@ -144,14 +141,22 @@ def catch_poke(name):
     print(name)
     pokemon = Pokemon.query.filter_by(name=name).first()
     print(pokemon)
-    current_user.catch(pokemon)
-    return redirect(url_for('lookup_page'))
+    if len(current_user.team) < 5:
+        current_user.catch(pokemon)
+        return redirect(url_for('lookup_page'))
+    else:
+        flash("You can only have 5 pokemon on your team. Please release one to make room for another.")
+        return redirect(url_for('lookup_page'))
     # if pokemon in current_user.team:
 
 
 @app.route('/team/')
+@login_required
 def team_page():
-    team = current_user.team
+    team = current_user.get_team()
+    print(team)
+
+    
     return render_template('team.html', team=team)
 
 @app.route('/release_poke/<name>')
@@ -161,6 +166,39 @@ def release_poke(name):
     print(pokemon)
     current_user.release_poke(pokemon)
     return redirect(url_for('team_page'))
+
+
+@app.route('/battle/')
+def battle_page():
+    users = User.query.all()
+    return render_template('battle.html', users=users)
+
+@app.route('/battle/<opponent_id>')
+@login_required
+def start_battle(opponent_id):
+    my_team = current_user.get_team()
+ 
+    opponent = User.query.filter_by(id=opponent_id).first()
+    opponent_team = opponent.get_team()
+    
+    outcome = current_user.start_battle(opponent_team, my_team)
+    print(outcome) 
+    if outcome == True:
+        flash('You won!')
+        return redirect(url_for('battle_page'))
+    else:
+        flash('You lost!')
+        return redirect(url_for('battle_page'))
+
+   
+
+
+    
+
+
+    
+    
+    
 
 # @app.route('/team/<my_team>')
 # def team_page(my_team):
